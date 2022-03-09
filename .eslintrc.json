@@ -1,0 +1,75 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-base",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "plugins": ["@typescript-eslint", "jest", "prettier", "import"],
+  "rules": {
+    "prettier/prettier": ["off", { "usePrettierrc": true }],
+    "no-console": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "error",
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "never",
+        "groups": [
+          [
+            ["builtin"], // Built-in types are first
+            ["sibling", "parent"], // Then sibling and parent types. They can be mingled together
+            "index", // Then the index file
+            ["object", "type"],
+            // Then the rest: internal and external type
+            ["internal", "external"]
+          ]
+        ]
+      }
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true,
+        "typedefs": true
+      }
+    ],
+    "import/no-extraneous-dependencies": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  }
+}

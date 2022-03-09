@@ -1,0 +1,79 @@
+
+    <!-- <a href="#main-content">Skip to main content</a> -->
+    <div id="app">
+      <header class="header">
+        <div class="container flex a-center sp-btw">
+          <h1 class="fs-700 ls-7 text-upper">Todo</h1>
+          <button
+            aria-label="switch app theme"
+            id=""
+            class="btn btn--switch"
+          ></button>
+        </div>
+      </header>
+      <!-- MAIN -->
+      <main id="main-content">
+        <!-- TODO ADD FORM -->
+        <div class="container">
+          <form class="form">
+            <div class="form-control">
+              <button aria-checked="false" type="submit" id="add-todo"></button>
+              <input
+                type="text"
+                name="todo"
+                id="todo-add"
+                class="form-input"
+                placeholder="Create a new todo..."
+                aria-label="enter a new todo"
+              />
+              <span></span>
+            </div>
+          </form>
+
+          <!-- TODOS SECTION -->
+          <section class="section section-todos">
+            <ul role="list" class="todo-list">
+              <li draggable="true" class="todo">
+                <button
+                  aria-label="change todo type"
+                  class="btn todo--toggle"
+                ></button>
+                <p>Jog around the park 3x</p>
+                <button
+                  aria-label="delete this todo"
+                  class="btn todo--delete"
+                ></button>
+              </li>
+            </ul>
+          </section>
+          <div class="section todo-list__footer">
+            <p class="todos--left">5 items left</p>
+            <div class="todo-list__options">
+              <button data-option="all" class="todo-list__filter-option">
+                All
+              </button>
+              <button data-option="active" class="todo-list__filter-option">
+                Active
+              </button>
+              <button data-option="completed" class="todo-list__filter-option">
+                Completed
+              </button>
+            </div>
+            <button id="btn--clear">Clear Completed</button>
+          </div>
+          <!-- FOOTER -->
+          <footer class="section section-footer">
+            <p class="suggestion">Drag and drop to reorder list</p>
+            <p class="attribution">
+              Challenge by
+              <a
+                href="https://www.frontendmentor.io?ref=challenge"
+                target="_blank"
+                >Frontend Mentor</a
+              >. Coded by
+              <a href="https://github.com/pHoeniX-svg">pHoeniX-svg</a>.
+            </p>
+          </footer>
+        </div>
+      </main>
+    </div>
