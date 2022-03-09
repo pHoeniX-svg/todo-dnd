@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
+import { IUser } from '~server/types';
 
 const { Schema } = mongoose;
 
-const schema = new Schema(
+const schema = new Schema<IUser>(
   {
-    username: {
+    name: {
       type: String,
-      required: [true, 'please enter a username'],
+      required: [true, 'please enter a name'],
     },
     email: {
       type: String,
@@ -17,12 +18,20 @@ const schema = new Schema(
       type: String,
       required: [true, 'please enter a password'],
     },
+    roles: [
+      {
+        type: Number,
+        default: 1358,
+      },
+      { type: Number },
+    ],
+    refreshToken: String,
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model('User', schema);
+const UserModel = mongoose.model<IUser>('User', schema);
 
-export { User };
+export { UserModel };
