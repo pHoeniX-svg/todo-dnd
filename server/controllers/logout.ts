@@ -3,7 +3,7 @@ import { UserModel } from '~server/models';
 
 /**
  * @desc   Sign Out A User
- * @route  POST /api/logout
+ * @route  GET /api/logout
  * @access Private
  */
 const handleLogout: RequestHandler = async (req, res) => {
