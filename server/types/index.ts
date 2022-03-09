@@ -4,11 +4,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
+  roles: [Editor: 1358, Admin?: 6329];
+  refreshToken?: string;
 }
 
-export interface ITodo {
-  user: IUser['id'];
-  id: string;
-  text: string;
-  
-}
