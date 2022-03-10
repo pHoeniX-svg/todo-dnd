@@ -7,7 +7,16 @@ import { UserModel } from '~server/models';
  * @access Private
  */
 const getUsers: RequestHandler = async (_req, res) => {
-  const users = await UserModel.find();
+  const users = await (
+    await UserModel.find()
+  ).map((user) => {
+    const { name, email, _id } = user;
+    return {
+      _id,
+      name,
+      email,
+    };
+  });
   if (!users) return res.status(204).json({ message: 'no users found' });
   res.status(200).json(users);
 };
@@ -36,7 +45,9 @@ const getUser: RequestHandler = async (req, res) => {
       .json({ message: `no user matches the id ${request.params.id}.` });
   }
 
-  res.status(200).json(user);
+  const { name, email, _id, roles } = user;
+
+  res.status(200).json({ _id, name, email });
 };
 
 /**
