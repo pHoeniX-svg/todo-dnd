@@ -4,7 +4,6 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  roles: [Editor: 1358, Admin?: 6329];
+  roles: number[];
   refreshToken?: string;
 }
-

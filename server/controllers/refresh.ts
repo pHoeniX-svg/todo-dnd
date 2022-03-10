@@ -18,9 +18,9 @@ const getRefreshToken: RequestHandler = async (req, res) => {
   }
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN!, (err, decoded) => {
-    const payload = decoded as { name?: string };
+    const payload = decoded as { email?: string };
 
-    if (err || user.name !== payload.name) {
+    if (err || user.email !== payload.email) {
       return res.sendStatus(403);
     }
 
@@ -28,10 +28,8 @@ const getRefreshToken: RequestHandler = async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-        UserInfo: {
-          name: payload.name,
-          roles: roles,
-        },
+        email: user.email,
+        roles: roles,
       },
       process.env.JWT_ACCESS_TOKEN!,
       { expiresIn: '120s' }

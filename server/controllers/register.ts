@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async function (req, res) {
   }
 
   try {
-    const salt = await bcrypt.genSalt(16);
+    const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await UserModel.create({
@@ -32,11 +32,11 @@ const registerUser = asyncHandler(async function (req, res) {
       password: hashedPassword,
     });
 
-    if (user) {
-      res.status(201).json({ success: `new user ${user?.name} created!` });
-    } else {
+    if (!user) {
       res.status(400).json({ message: 'invalid data' });
     }
+
+    res.status(201).json({ success: `new user ${user?.name} created!` });
   } catch (error) {
     let err = error as Error;
     res.status(500).json({ message: err.message });

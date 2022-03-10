@@ -18,13 +18,10 @@ const schema = new Schema<IUser>(
       type: String,
       required: [true, 'please enter a password'],
     },
-    roles: [
-      {
-        type: Number,
-        default: 1358,
-      },
-      { type: Number },
-    ],
+    roles: {
+      type: ['Number'],
+      default: [1358],
+    },
     refreshToken: String,
   },
   {
