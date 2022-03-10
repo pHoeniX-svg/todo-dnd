@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt';
-import asyncHandler from 'express-async-handler';
+import { RequestHandler } from 'express';
 import { UserModel } from '~server/models';
 /**
  * @desc   Create A User
  * @route  POST /api/register
  * @access Public
  */
-const registerUser = asyncHandler(async function (req, res) {
+const registerUser: RequestHandler = async (req, res) => {
   const { name, email, password } = req.body as {
     name: string;
     email: string;
@@ -14,16 +14,18 @@ const registerUser = asyncHandler(async function (req, res) {
   };
 
   if (!name || !email || !password) {
-    res.status(400).json({ message: 'username, email and password required' });
+    return res
+      .status(400)
+      .json({ message: 'username, email and password required' });
   }
   const userExists = await UserModel.findOne({ email }).exec();
 
   if (userExists) {
-    res.status(409).json({ message: 'this user already exists' });
+    return res.status(409).json({ message: 'this user already exists' });
   }
 
   try {
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(16);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await UserModel.create({
@@ -33,14 +35,13 @@ const registerUser = asyncHandler(async function (req, res) {
     });
 
     if (!user) {
-      res.status(400).json({ message: 'invalid data' });
+      return res.status(400).json({ message: 'invalid data' });
     }
-
     res.status(201).json({ success: `new user ${user?.name} created!` });
   } catch (error) {
     let err = error as Error;
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
-});
+};
 
 export { registerUser };
