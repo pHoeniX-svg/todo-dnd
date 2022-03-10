@@ -5,9 +5,7 @@ import express from 'express';
 import { connectDB, corsOptions } from './config';
 import { credentials, errorHandler, logger, protect } from './middleware';
 
-dotenv.config({
-  allowEmptyValues: true,
-});
+dotenv.config();
 
 const PORT = process.env.PORT || 3800;
 const app = express();
